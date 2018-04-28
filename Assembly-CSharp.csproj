@@ -55,6 +55,7 @@
      <Compile Include="Assets\_Script\DestroyPartical.cs" />
      <Compile Include="Assets\_Script\HazardScript.cs" />
      <Compile Include="Assets\_Script\MoveScenes2D.cs" />
+     <Compile Include="Assets\_Script\Touch.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Games/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

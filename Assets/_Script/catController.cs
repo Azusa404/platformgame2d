@@ -13,6 +13,9 @@ public class catController : MonoBehaviour {
     public bool facingrRight;
     public Transform startPoint;
     public GameObject Explode;
+    public bool moveRight;
+    public bool moveLeft;
+    public bool jump;
 
 
     private bool onGround;
@@ -30,17 +33,27 @@ public class catController : MonoBehaviour {
     {
         ////检测键盘输入（两种方法）
         //左
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow)|| moveLeft)
         {
             cat2d.velocity = new Vector2(-movespeed, cat2d.velocity.y);
 
         }
+        //if (moveLeft)
+        //{
+        //    cat2d.velocity = new Vector2(-movespeed, cat2d.velocity.y);
+
+        //}
         //右
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow)|| moveRight)
         {
             cat2d.velocity = new Vector2(movespeed, cat2d.velocity.y);
 
         }
+        //if (moveRight)
+        //{
+        //    cat2d.velocity = new Vector2(movespeed, cat2d.velocity.y);
+
+        //}
         //float moveHorizontal = Input.GetAxis("Horizontal");
         //float moveVertical = Input.GetAxis("Vertical");
         //Vector2 movement = new Vector2(moveHorizontal, moveVertical);
@@ -50,9 +63,10 @@ public class catController : MonoBehaviour {
         onGround = Physics2D.OverlapCircle(groundcheck.position, groundcheckRadius, whatisground);
 
         //跳跃
-        if (Input.GetKey(KeyCode.Space) && onGround)
+        if ((Input.GetKey(KeyCode.Space)||jump) && onGround)
         {
             cat2d.velocity = new Vector2(cat2d.velocity.x, jumpheight);
+            jump = false;
         }
         //判断面向是否正确，不正确则翻转
         h = cat2d.velocity.x;
