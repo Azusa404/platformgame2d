@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{384B81BB-9AD6-4C41-1B1A-C016BDFF27A3}</ProjectGuid>
+    <ProjectGuid>{B1497A90-7A02-07A8-DE78-9C69130C0DAA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_Script\Bullet.cs" />
      <Compile Include="Assets\_Script\catController.cs" />
      <Compile Include="Assets\_Script\DestroyPartical.cs" />
      <Compile Include="Assets\_Script\HazardScript.cs" />

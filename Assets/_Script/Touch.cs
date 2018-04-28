@@ -34,4 +34,8 @@ public class Touch : MonoBehaviour {
     {
         cat2d.jump = true;
     }
+    public void Fire()
+    {
+        cat2d.fire = true;
+    }
 }

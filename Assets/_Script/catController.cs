@@ -10,12 +10,18 @@ public class catController : MonoBehaviour {
     public Transform groundcheck;
     public LayerMask whatisground;
     public float groundcheckRadius;
-    public bool facingrRight;
-    public Transform startPoint;
-    public GameObject Explode;
+    public bool facingrRight;   //面向
+    public Transform startPoint;//重生点
+    public GameObject Explode;  //死亡特效
+    public GameObject bulletToRight;   //开火
+    public GameObject bulletToLeft;   //开火
+    public Transform firePoint; //开火
+    public bool fire;           //开火
     public bool moveRight;
     public bool moveLeft;
     public bool jump;
+
+
 
 
     private bool onGround;
@@ -38,22 +44,14 @@ public class catController : MonoBehaviour {
             cat2d.velocity = new Vector2(-movespeed, cat2d.velocity.y);
 
         }
-        //if (moveLeft)
-        //{
-        //    cat2d.velocity = new Vector2(-movespeed, cat2d.velocity.y);
 
-        //}
         //右
         if (Input.GetKey(KeyCode.RightArrow)|| moveRight)
         {
             cat2d.velocity = new Vector2(movespeed, cat2d.velocity.y);
 
         }
-        //if (moveRight)
-        //{
-        //    cat2d.velocity = new Vector2(movespeed, cat2d.velocity.y);
 
-        //}
         //float moveHorizontal = Input.GetAxis("Horizontal");
         //float moveVertical = Input.GetAxis("Vertical");
         //Vector2 movement = new Vector2(moveHorizontal, moveVertical);
@@ -67,6 +65,21 @@ public class catController : MonoBehaviour {
         {
             cat2d.velocity = new Vector2(cat2d.velocity.x, jumpheight);
             jump = false;
+        }
+
+        //开火功能
+        if (Input.GetKey(KeyCode.Z) || fire)
+        {
+            if (facingrRight)
+            {
+                Instantiate(bulletToRight, firePoint.position, firePoint.rotation);
+                fire = false;
+            }
+            else
+            {
+                Instantiate(bulletToLeft, firePoint.position, firePoint.rotation);
+                fire = false;
+            }
         }
         //判断面向是否正确，不正确则翻转
         h = cat2d.velocity.x;
