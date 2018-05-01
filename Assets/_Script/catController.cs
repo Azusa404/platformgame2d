@@ -1,5 +1,5 @@
 ﻿///4月30日：Animator：添加人物的idle与run动画效果
-///
+///5月1日：canDoubleJump添加二段跳。心得：有键盘输入的地方尽量别用else，检测速度跟不上
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,14 +24,13 @@ public class catController : MonoBehaviour {
     public bool moveLeft;
     public bool jump;
     Animator _anim;//动画
-
+    public bool canDoubleJump = true;//二段跳
 
 
     private bool onGround;
     private Vector3 theScale;
     private float h;
     private float nextFire = 0;
-    
     void Start()
     {
         cat2d = GetComponent<Rigidbody2D>();
@@ -60,7 +59,7 @@ public class catController : MonoBehaviour {
 
             _anim.SetBool("run", true);
         }
-        else
+        if (!Input.GetKey(KeyCode.LeftArrow) && !moveLeft && !Input.GetKey(KeyCode.RightArrow) && !moveRight)
         {
             _anim.SetBool("run", false);
         }
@@ -73,13 +72,29 @@ public class catController : MonoBehaviour {
         //检测是否在跳跃
         onGround = Physics2D.OverlapCircle(groundcheck.position, groundcheckRadius, whatisground);
 
-        //跳跃
-        if ((Input.GetKey(KeyCode.Space)||jump) && onGround)
+        //跳跃&二段跳
+        if (Input.GetKeyDown(KeyCode.Space) || jump)
         {
-            cat2d.velocity = new Vector2(cat2d.velocity.x, jumpheight);
-            jump = false;
-            //_anim.SetTrigger("jump");
+            if (onGround)
+            {
+                cat2d.velocity = new Vector2(cat2d.velocity.x, jumpheight);
+                jump = false;
+                canDoubleJump = true;
+                //_anim.SetTrigger("jump");
+                Debug.Log("normaljump");
+            }
+            if (!onGround)
+            {
+                if (canDoubleJump)
+                {
+                    jump = false;
+                    canDoubleJump = false;
+                    cat2d.velocity = new Vector2(cat2d.velocity.x, jumpheight);
+                    Debug.Log("Double jump");
+                }
+            }
         }
+
 
         //开火功能
         if ((Input.GetKey(KeyCode.Z) || fire) && Time.time > nextFire) 
