@@ -1,5 +1,6 @@
 ﻿///4月30日：Animator：添加人物的idle与run动画效果
 ///5月1日：canDoubleJump添加二段跳。心得：有键盘输入的地方尽量别用else，检测速度跟不上
+///5月2日：添加相机平滑CameraFollow
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,7 +60,8 @@ public class catController : MonoBehaviour {
 
             _anim.SetBool("run", true);
         }
-        if (!Input.GetKey(KeyCode.LeftArrow) && !moveLeft && !Input.GetKey(KeyCode.RightArrow) && !moveRight)
+        //if (!Input.GetKey(KeyCode.LeftArrow) && !moveLeft && !Input.GetKey(KeyCode.RightArrow) && !moveRight)
+        else
         {
             _anim.SetBool("run", false);
         }

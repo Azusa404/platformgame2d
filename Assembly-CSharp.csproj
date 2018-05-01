@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_Script\Bullet.cs" />
+     <Compile Include="Assets\_Script\CameraFollow.cs" />
      <Compile Include="Assets\_Script\catController.cs" />
      <Compile Include="Assets\_Script\DestroyPartical.cs" />
      <Compile Include="Assets\_Script\HazardScript.cs" />
