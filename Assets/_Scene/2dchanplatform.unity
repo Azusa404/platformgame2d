@@ -994,6 +994,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   smoothTime: 1
+  minCamera: {x: -1000, y: 4, z: -10}
+  maxCamera: {x: 1000, y: 1000, z: -10}
+  bound: 1
   velocity: {x: 0, y: 0}
 --- !u!1001 &1021059917
 Prefab:
