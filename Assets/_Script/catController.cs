@@ -43,6 +43,7 @@ public class catController : MonoBehaviour {
 
     void FixedUpdate()
     {
+
         ////检测键盘输入（两种方法）
         
         if (Input.GetKey(KeyCode.LeftArrow) || moveLeft|| Input.GetKey(KeyCode.RightArrow) || moveRight)

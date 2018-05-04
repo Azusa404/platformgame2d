@@ -13,8 +13,8 @@ public class HazardScript : MonoBehaviour {
 	
 
 	void Update () {
-        
+
         // transform.position = new Vector3(Mathf.PingPong(Time.time, 3), transform.position.y, transform.position.z);
-        transform.position = new Vector3(transform.position.x + w*Mathf.Sin(Time.time*speed), transform.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x + w * Mathf.Sin(Time.time * speed) * Time.timeScale, transform.position.y, transform.position.z);
 	}
 }
