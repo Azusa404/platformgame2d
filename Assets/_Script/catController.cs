@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class catController : MonoBehaviour {
 
@@ -17,14 +18,23 @@ public class catController : MonoBehaviour {
     public bool facingrRight;   //面向
     public Transform startPoint;//重生点
     public GameObject Explode;  //死亡特效
-    public GameObject bulletToRight;   //开火
-    public GameObject bulletToLeft;   //开火
-    public Transform firePoint; //开火
-    public bool fire;           //开火
-    public float fireRate = 0.5f;//开火
+
+    //Fire 开火
+    public GameObject bulletToRight;   
+    public GameObject bulletToLeft;   
+    public Transform firePoint; 
+    public bool fire;           
+    public float fireRate = 0.5f;
+
+    //Stats 人物属性
+    public int curHP;
+    public int maxHP = 100;
+
+    //Touch 触摸UI
     public bool moveRight;
     public bool moveLeft;
     public bool jump;
+
     Animator _anim;//动画
     public bool canDoubleJump = true;//二段跳
 
@@ -33,12 +43,15 @@ public class catController : MonoBehaviour {
     private Vector3 theScale;
     private float h;
     private float nextFire = 0;
+
     void Start()
     {
         cat2d = GetComponent<Rigidbody2D>();
         facingrRight = true;
         cat2d.transform.position = startPoint.position;
         _anim = GetComponent<Animator>();
+
+        curHP = maxHP;
     }
 
     void FixedUpdate()
@@ -128,6 +141,18 @@ public class catController : MonoBehaviour {
             Flip();
         }
 
+        //检查血量
+        if (curHP > maxHP)
+        {
+            curHP = maxHP;
+        }
+        if (curHP <= 0)
+        {
+            //
+            //StartCoroutine(DelayScript.run(() => { Reborn(); }, 3));
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Debug.Log("Restart : " + SceneManager.GetActiveScene().name);
+        }
     }
         //判断动画状态
 
@@ -145,14 +170,20 @@ public class catController : MonoBehaviour {
         if (other.gameObject.CompareTag("1234"))
         {
             Death();
-            Reborn();
-        }
+            
+            //Reborn();
+            StartCoroutine(DelayScript.run(() => 
+            {
+                Reborn(); }, 3));
+            }
     }
 
     void Death()
     {
         Instantiate(Explode, transform.position, transform.rotation);
         enabled = false;
+        //transform.position = new Vector3(transform.position.x-3f, transform.position.y, transform.position.z);
+        transform.position = startPoint.position;
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         GetComponent<Renderer>().enabled = false;
         Debug.Log("You've been Dead");
