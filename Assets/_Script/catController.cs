@@ -28,7 +28,7 @@ public class catController : MonoBehaviour {
 
     //Stats 人物属性
     public int curHP;
-    public int maxHP = 100;
+    public int maxHP = 5;
 
     //Touch 触摸UI
     public bool moveRight;
@@ -165,18 +165,19 @@ public class catController : MonoBehaviour {
         facingrRight = !facingrRight;
         //Debug.Log("Flip");
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("1234"))
-        {
-            Death();
-            
-            //Reborn();
-            StartCoroutine(DelayScript.run(() => 
-            {
-                Reborn(); }, 3));
-            }
-    }
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.gameObject.CompareTag("1234"))
+    //    {
+    //        Death();
+
+    //        //Reborn();
+    //        StartCoroutine(DelayScript.run(() =>
+    //        {
+    //            Reborn();
+    //        }, 3));
+    //    }
+    //}
 
     void Death()
     {
@@ -194,6 +195,10 @@ public class catController : MonoBehaviour {
         transform.position = startPoint.position;
         enabled = true;
         GetComponent<Renderer>().enabled = true;
+    }
+    public void Damage(int dmg)
+    {
+        curHP -= dmg;
     }
 }
   
